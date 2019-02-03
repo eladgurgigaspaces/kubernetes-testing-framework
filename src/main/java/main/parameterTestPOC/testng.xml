@@ -1,0 +1,9 @@
+<suite name="Kubernetes Suite">
+    <test name="Helm Install on xap gigaspaces">
+        <parameter name="repo" value="gigaspaces"/>
+        <parameter name="chart" value="xap"/>
+        <classes>
+            <class name="main.parameterTestPOC.TestNGParameterTest" />
+        </classes>
+    </test>
+</suite>

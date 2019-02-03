@@ -1,5 +1,7 @@
 package main;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -17,19 +19,23 @@ public class helmInstallTest extends KubernetesAbstractTest {
     public helmInstallTest() throws IOException {
     }
 
+
     @Test
-    public void verifyHelmInstallOnChart() {
-        log("Installing chart: " + this.chartName);
-        installChart(this.repoName, this.chartName, CHART_INSTANCE_NAME);
+    public void verifyHelmInstallOnChart(String repo, String chart) {
+        log("repo: " + repo);
+        log("chart: " + chart);
 
-        log("validating that {0} instance is up", this.chartName);
-        String errorMsg = MessageFormat.format("chart instance named '{0}' is not exist", CHART_INSTANCE_NAME);
-        Assert.assertTrue(isChartInstanceExist(CHART_INSTANCE_NAME), errorMsg);
-
-        log("Remove chart named: {0}", CHART_INSTANCE_NAME);
-        removeChartInstance(CHART_INSTANCE_NAME);
-
-        Assert.assertTrue(getAllChartsInstancesNames().isEmpty(), "Failed to remove chart");
+//        log("Installing chart: " + chart);
+//        installChart(this.repoName, this.chartName, CHART_INSTANCE_NAME);
+//
+//        log("validating that {0} instance is up", this.chartName);
+//        String errorMsg = MessageFormat.format("chart instance named '{0}' is not exist", CHART_INSTANCE_NAME);
+//        Assert.assertTrue(isChartInstanceExist(CHART_INSTANCE_NAME), errorMsg);
+//
+//        log("Remove chart named: {0}", CHART_INSTANCE_NAME);
+//        removeChartInstance(CHART_INSTANCE_NAME);
+//
+//        Assert.assertTrue(getAllChartsInstancesNames().isEmpty(), "Failed to remove chart");
     }
 
 
