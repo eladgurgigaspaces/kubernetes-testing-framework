@@ -44,14 +44,22 @@ public class HelmUtils {
         runBashCommand(cmd);
     }
 
-    public static void installChartWithArgs(String repoName, String chartName, String instanceName, String... args) {
+    /***
+     *
+     * @param repo - Helm chart repo - e.g.: gigaspaces
+     * @param chart - The name of the chart - e.g.: xap
+     * @param instanceName - The name you would like the instance will have - e.g.: hello
+     * @param args - arguments for the --set parts of the helm install - e.g.: ha=true", "partitions=2
+     */
+    public static void installChartWithArgs(String repo, String chart, String instanceName, String... args) {
         StringBuilder sb = new StringBuilder("");
         for (String arg : args) {
             sb.append(arg).append(",");
         }
         sb.deleteCharAt(sb.length() - 1);
-        String cmd = MessageFormat.format("helm install {0}/{1} --name {2} --set {3}", repoName, chartName, instanceName, sb.toString());
+        String cmd = MessageFormat.format("helm install {0}/{1} --name {2} --set {3}", repo, chart, instanceName, sb.toString());
         runBashCommand(cmd);
+        Assert.assertTrue(isChartInstanceExist(instanceName));
     }
 
 }
