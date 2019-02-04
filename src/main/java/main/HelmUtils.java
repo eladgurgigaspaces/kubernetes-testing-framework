@@ -39,9 +39,8 @@ public class HelmUtils {
         return getAllChartsInstancesNames().contains(chartName);
     }
 
-    public static void installChart(String repoName, String chartName, String instanceName) {
-        String cmd = MessageFormat.format("helm install {0}/{1} --name {2}", repoName, chartName, instanceName);
-        runBashCommand(cmd);
+    public static void installChart(String repo, String chart, String instanceName) {
+        installChartWithArgs(repo, chart, instanceName);
     }
 
     /***
@@ -52,12 +51,18 @@ public class HelmUtils {
      * @param args - arguments for the --set parts of the helm install - e.g.: ha=true", "partitions=2
      */
     public static void installChartWithArgs(String repo, String chart, String instanceName, String... args) {
+        log("Installing chart: {0} from repo: {1}", chart, repo);
+
         StringBuilder sb = new StringBuilder("");
-        for (String arg : args) {
-            sb.append(arg).append(",");
+
+        if (args.length > 0) {
+            sb.append("--set ");
+            for (String arg : args) {
+                sb.append(arg).append(",");
+            }
+            sb.deleteCharAt(sb.length() - 1);
         }
-        sb.deleteCharAt(sb.length() - 1);
-        String cmd = MessageFormat.format("helm install {0}/{1} --name {2} --set {3}", repo, chart, instanceName, sb.toString());
+        String cmd = MessageFormat.format("helm install {0}/{1} --name {2} {3}", repo, chart, instanceName, sb.toString());
         runBashCommand(cmd);
         Assert.assertTrue(isChartInstanceExist(instanceName));
     }
