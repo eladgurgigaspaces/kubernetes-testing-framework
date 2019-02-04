@@ -24,11 +24,11 @@ public class SpaceHATest extends KubernetesAbstractTest {
     @Test
     public void verifyHelmInstallOnChart() {
         log("Installing manager chart");
-        installChart(this.repoName, MANAGER_CHART_NAME, MANAGER_NAME);
+        installChart(this.repo, MANAGER_CHART_NAME, MANAGER_NAME);
         Assert.assertTrue(isChartInstanceExist(MANAGER_NAME));
 
         log("Installing space and connect it to the existing manager");
-        installChartWithArgs(this.repoName, SPACE_CHART_NAME, SPACE_NAME, "manager.name=hello", "ha=true", "partitions=2");
+        installChartWithArgs(this.repo, SPACE_CHART_NAME, SPACE_NAME, "manager.name=hello", "ha=true", "partitions=2");
         Assert.assertTrue(isChartInstanceExist(SPACE_NAME));
 
         // TODO: assert that the charts are running (using the k8 api)

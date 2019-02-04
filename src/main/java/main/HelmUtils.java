@@ -1,6 +1,7 @@
 package main;
 
-import org.testng.Assert;
+
+import org.junit.Assert;
 
 import java.text.MessageFormat;
 
@@ -13,7 +14,7 @@ public class HelmUtils {
         runBashCommand("helm del --purge " + chartName);
         String charts = runBashCommand("helm list --short");
         String erroMsg = MessageFormat.format("Failed to remove chart: {0} from cluster", chartName);
-        Assert.assertFalse(charts.contains(chartName), erroMsg);
+        Assert.assertFalse(erroMsg, charts.contains(chartName));
     }
 
     public static void removeAllChartsInstances() {
@@ -26,7 +27,7 @@ public class HelmUtils {
             for (String chart : charts.split(" ")) {
                 removeChartInstance(chart);
             }
-            Assert.assertTrue(getAllChartsInstancesNames().isEmpty(), "Failed to remove all charts from cluster");
+            Assert.assertTrue("Failed to remove all charts from cluster", getAllChartsInstancesNames().isEmpty());
         }
     }
 

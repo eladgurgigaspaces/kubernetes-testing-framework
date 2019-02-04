@@ -1,7 +1,7 @@
 package main;
 
 import iTests.framework.utils.CommandTestUtils;
-import org.testng.Assert;
+import org.junit.Assert;
 
 import java.text.MessageFormat;
 

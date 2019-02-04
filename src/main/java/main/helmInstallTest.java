@@ -1,10 +1,8 @@
 package main;
 
+import org.junit.Assert;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.testng.Assert;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -19,24 +17,26 @@ public class helmInstallTest extends KubernetesAbstractTest {
     public helmInstallTest() throws IOException {
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"xap", "insightedge"})
+    public void verifyHelmInstallOnChart(String chart) {
+        log("Installing chart: {0} from repo: {1}", chart, this.repo);
+        installChart(this.repo, chart, CHART_INSTANCE_NAME);
 
-    @Test
-    public void verifyHelmInstallOnChart(String repo, String chart) {
-        log("repo: " + repo);
-        log("chart: " + chart);
+        log("validating that {0} instance is up", chart);
+        String errorMsg = MessageFormat.format("chart instance named '{0}' is not exist", CHART_INSTANCE_NAME);
+        Assert.assertTrue(errorMsg, isChartInstanceExist(CHART_INSTANCE_NAME));
 
-//        log("Installing chart: " + chart);
-//        installChart(this.repoName, this.chartName, CHART_INSTANCE_NAME);
-//
-//        log("validating that {0} instance is up", this.chartName);
-//        String errorMsg = MessageFormat.format("chart instance named '{0}' is not exist", CHART_INSTANCE_NAME);
-//        Assert.assertTrue(isChartInstanceExist(CHART_INSTANCE_NAME), errorMsg);
-//
-//        log("Remove chart named: {0}", CHART_INSTANCE_NAME);
-//        removeChartInstance(CHART_INSTANCE_NAME);
-//
-//        Assert.assertTrue(getAllChartsInstancesNames().isEmpty(), "Failed to remove chart");
+        log("Remove chart named: {0}", CHART_INSTANCE_NAME);
+        removeChartInstance(CHART_INSTANCE_NAME);
+
+        Assert.assertTrue("Failed to remove chart", getAllChartsInstancesNames().isEmpty());
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"Elad", "Gur"})
+    public void test2(String injectedArg) {
+        log(injectedArg);
+    }
 
 }
