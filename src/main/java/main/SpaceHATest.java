@@ -24,7 +24,7 @@ public class SpaceHATest extends KubernetesAbstractTest {
         installChartAndValidate(MANAGER_CHART, MANAGER_NAME);
 
         log("Installing space and connect it to the existing manager");
-        installChartAndValidate(repo, SPACE_CHART_NAME, SPACE_NAME, "manager.name=hello", "ha=true", "partitions=2");
+        installChartAndValidate(SPACE_CHART_NAME, SPACE_NAME, "manager.name=hello", "ha=true", "partitions=2");
     }
 
 }
