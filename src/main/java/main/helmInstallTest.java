@@ -33,10 +33,4 @@ public class helmInstallTest extends KubernetesAbstractTest {
         Assert.assertTrue("Failed to remove chart", getAllChartsInstancesNames().isEmpty());
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"Elad", "Gur"})
-    public void test2(String injectedArg) {
-        log(injectedArg);
-    }
-
 }

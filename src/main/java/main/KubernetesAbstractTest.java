@@ -3,7 +3,7 @@ package main;
 import io.kubernetes.client.Configuration;
 import io.kubernetes.client.apis.CoreV1Api;
 import io.kubernetes.client.util.Config;
-import org.testng.annotations.AfterTest;
+import org.junit.jupiter.api.AfterEach;
 
 import java.io.IOException;
 
@@ -37,8 +37,8 @@ public class KubernetesAbstractTest {
         api = new CoreV1Api();
     }
 
-    @AfterTest
-    public void testDown() {
+    @AfterEach
+    public void tearDown() {
         removeAllChartsInstances();
     }
 

@@ -1,7 +1,8 @@
 package main;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -21,7 +22,8 @@ public class SpaceHATest extends KubernetesAbstractTest {
     public SpaceHATest() throws IOException {
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"xap", "insightedge"})
     public void verifyHelmInstallOnChart() {
         log("Installing manager chart");
         installChart(this.repo, MANAGER_CHART_NAME, MANAGER_NAME);
@@ -34,13 +36,13 @@ public class SpaceHATest extends KubernetesAbstractTest {
         // TODO: assert that the charts are running (using the k8 api)
 
         log("validating that {0} instance is up", MANAGER_CHART_NAME);
-        Assert.assertTrue(isChartInstanceExist(MANAGER_NAME), MessageFormat.format("chart instance named '{0}' is not exist", MANAGER_NAME));
+        Assert.assertTrue(MessageFormat.format("chart instance named '{0}' is not exist", MANAGER_NAME), isChartInstanceExist(MANAGER_NAME));
 
         log("Removing charts");
         removeAllChartsInstances();
 
         log("Remove chart named: {0}", CHART_INSTANCE_NAME);
-        Assert.assertTrue(getAllChartsInstancesNames().isEmpty(), "Failed to remove chart");
+        Assert.assertTrue("Failed to remove chart", getAllChartsInstancesNames().isEmpty());
     }
 
 }
