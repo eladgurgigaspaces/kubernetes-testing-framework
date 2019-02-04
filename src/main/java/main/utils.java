@@ -1,9 +1,17 @@
 package main;
 
 import iTests.framework.utils.CommandTestUtils;
+import io.kubernetes.client.Configuration;
+import io.kubernetes.client.apis.CoreV1Api;
+import io.kubernetes.client.util.Config;
 import org.junit.Assert;
 
+import java.io.IOException;
 import java.text.MessageFormat;
+
+import static main.HelmUtils.installChart;
+import static main.KubernetesUtils.assertPodsIsRunning;
+import static main.helmInstallTest.CHART_INSTANCE_NAME;
 
 public class utils {
 
@@ -20,11 +28,11 @@ public class utils {
         String result = "";
         try {
             result = CommandTestUtils.runLocalCommand(cmd, true, false);
-            String formaterResult = new StringBuilder("\nCommand Result:\n")
-                    .append("------------\n")
-                    .append(result).append('\n')
-                    .append("------------\n").toString();
-            System.out.println(formaterResult);
+//            String formaterResult = new StringBuilder("\nCommand Result:\n")
+//                    .append("------------\n")
+//                    .append(result).append('\n')
+//                    .append("------------\n").toString();
+//            System.out.println(formaterResult);
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
