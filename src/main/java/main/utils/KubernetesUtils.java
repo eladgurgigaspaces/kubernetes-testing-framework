@@ -1,7 +1,6 @@
-package main;
+package main.utils;
 
 import iTests.framework.utils.AssertUtils;
-import iTests.framework.utils.AssertUtils.AssertConditionProvider;
 import iTests.framework.utils.AssertUtils.RepetitiveConditionProvider;
 import io.kubernetes.client.ApiException;
 import io.kubernetes.client.apis.CoreV1Api;
@@ -9,11 +8,9 @@ import io.kubernetes.client.models.V1Pod;
 import io.kubernetes.client.models.V1PodList;
 import org.junit.Assert;
 
-import java.util.concurrent.TimeUnit;
-
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static main.utils.log;
+import static main.utils.utils.log;
 
 public class KubernetesUtils {
 
@@ -52,7 +49,7 @@ public class KubernetesUtils {
             }
         };
 
-        AssertUtils.repetitiveAssertTrue(errorMsg, conditionProvider,  SECONDS.toMillis(30), 2000);
+        AssertUtils.repetitiveAssertTrue(errorMsg, conditionProvider, SECONDS.toMillis(30), 2000);
     }
 
     private static V1Pod getPodByName(CoreV1Api api, V1Pod pod) throws ApiException {

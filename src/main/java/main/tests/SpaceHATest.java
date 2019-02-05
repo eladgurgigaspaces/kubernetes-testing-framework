@@ -1,22 +1,18 @@
-package main;
+package main.tests;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
 
-import static main.utils.log;
+import static main.utils.utils.log;
 
 public class SpaceHATest extends KubernetesAbstractTest {
 
     public static final String MANAGER_CHART = "xap-manager";
     public static final String SPACE_CHART_NAME = "xap-pu";
-
     public static final String MANAGER_NAME = "hello";
     public static final String SPACE_NAME = "world";
-
-    public SpaceHATest() throws IOException {
-    }
 
     @ParameterizedTest
     @ValueSource(strings = {"xap", "insightedge"})

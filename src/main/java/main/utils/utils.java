@@ -1,17 +1,9 @@
-package main;
+package main.utils;
 
 import iTests.framework.utils.CommandTestUtils;
-import io.kubernetes.client.Configuration;
-import io.kubernetes.client.apis.CoreV1Api;
-import io.kubernetes.client.util.Config;
 import org.junit.Assert;
 
-import java.io.IOException;
 import java.text.MessageFormat;
-
-import static main.HelmUtils.installChart;
-import static main.KubernetesUtils.assertPodsIsRunning;
-import static main.helmInstallTest.CHART_INSTANCE_NAME;
 
 public class utils {
 

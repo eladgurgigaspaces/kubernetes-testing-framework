@@ -1,12 +1,12 @@
-package main;
+package main.utils;
 
 
 import org.junit.Assert;
 
 import java.text.MessageFormat;
 
-import static main.utils.log;
-import static main.utils.runBashCommand;
+import static main.utils.utils.log;
+import static main.utils.utils.runBashCommand;
 
 public class HelmUtils {
 

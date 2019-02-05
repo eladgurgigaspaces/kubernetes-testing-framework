@@ -30,7 +30,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        main.helmInstallTest
+                                        main.tests.helmInstallTest
                                     </mainClass>
                                 </manifest>
                             </archive>
@@ -43,6 +43,14 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>org.openspaces</id>
+            <url>http://maven-repository.openspaces.org</url>
+        </repository>
+    </repositories>
+
 
     <dependencies>
 
@@ -79,6 +87,11 @@
             <version>5.1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>elad</groupId>
+            <artifactId>xap-admin-rest-java-client-v2</artifactId>
+            <version>1</version>
+        </dependency>
 
     </dependencies>
 

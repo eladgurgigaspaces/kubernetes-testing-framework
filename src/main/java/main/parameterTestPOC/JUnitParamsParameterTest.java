@@ -5,7 +5,7 @@ import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static main.utils.log;
+import static main.utils.utils.log;
 
 @RunWith(JUnitParamsRunner.class)
 public class JUnitParamsParameterTest {

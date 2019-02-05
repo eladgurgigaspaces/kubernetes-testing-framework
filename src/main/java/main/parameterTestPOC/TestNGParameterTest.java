@@ -3,7 +3,7 @@ package main.parameterTestPOC;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import static main.utils.log;
+import static main.utils.utils.log;
 
 public class TestNGParameterTest {
 
